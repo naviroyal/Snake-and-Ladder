@@ -13,6 +13,7 @@ class Main
       puts "Enter #{n+1} player Name"
       player = Player.new(gets.chomp,n+1)
       @game.players << player
+      @game.player_place_mp[player.id] = 0
     end
     puts "Enter No. Of Snakes"
     num_of_snakes = gets.chomp.to_i
@@ -31,10 +32,14 @@ class Main
         ladder = Ladder.new(gets.chomp.to_i,gets.chomp.to_i)
         @game.ladders << ladder
     end
-
     while(!@game.is_game_completed)
         dice = Dice.roll(@game.no_of_dice)
+        @game.movePlayer(dice,@game.players[0])
+        if @game.has_player_won(@game.players[0])
+            puts "Player #{@game.players[0]&.name} won the game"
+        else
+          @game.players << @game.players[0]
+        end
+        @game.players.delete_at(0)
     end
-
-    @game.print
 end
