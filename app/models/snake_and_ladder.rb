@@ -44,7 +44,7 @@ class SnakeAndLadder
   end
 
   def is_game_completed
-    @players.size()==0
+    @players.size() == 0
   end
 
 end

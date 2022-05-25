@@ -9,12 +9,14 @@ class Main
     @game.setting_no_of_dices(1)
     puts "Enter No. Of Players"
     num_of_players = gets.chomp.to_i
+
     num_of_players.times do |n|
       puts "Enter #{n+1} player Name"
       player = Player.new(gets.chomp,n+1)
       @game.players << player
       @game.player_place_mp[player.id] = 0
     end
+
     puts "Enter No. Of Snakes"
     num_of_snakes = gets.chomp.to_i
 
@@ -32,6 +34,7 @@ class Main
         ladder = Ladder.new(gets.chomp.to_i,gets.chomp.to_i)
         @game.ladders << ladder
     end
+    
     while(!@game.is_game_completed)
         dice = Dice.roll(@game.no_of_dice)
         @game.movePlayer(dice,@game.players[0])
